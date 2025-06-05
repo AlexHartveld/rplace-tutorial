@@ -25,3 +25,14 @@ class Canvas():
         pixel_y = y % self.piece_size_y
         self.images[piece_x][piece_y].putpixel((pixel_x, pixel_y), color)
         self.images[piece_x][piece_y].save(self.path + self.get_filename(piece_x, piece_y))
+
+    def get_cell(self, x, y):
+        print("get cell: ", x, y)
+        piece_x = x // self.piece_size_x
+        piece_y = y // self.piece_size_y
+        if (self.images[piece_x][piece_y] == None):
+            self.load(piece_x, piece_y)
+
+        pixel_x = x % self.piece_size_x
+        pixel_y = y % self.piece_size_y
+        return self.images[piece_x][piece_y].getpixel((pixel_x, pixel_y))

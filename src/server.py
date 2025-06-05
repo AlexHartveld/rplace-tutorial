@@ -144,5 +144,29 @@ def paint():
     canvas.set_cell(data['x'], data['y'], ImageColor.getcolor(data['color'], "RGB"))
     return "OK"
 
+@app.route('/pixel', methods=['GET'])
+def getpixel():
+    args_dict = request.args.to_dict()
+    print(args_dict)
+    color = canvas.get_cell(int(args_dict['x']), int(args_dict['y']))
+    return str(color)
+
+@app.route('/pixel', methods=['POST'])
+def setpixel():
+    data = request.json
+    try:
+        x = int(data['x'])
+        y = int(data['y'])
+        color_hex = data['color']
+        color_rgb = ImageColor.getcolor(color_hex, "RGB")
+    except:
+        return "please provide coordinates and a color", 400
+    
+    
+    canvas.set_cell(data['x'], data['y'], color_rgb)
+
+    return f"{x}, {y}, {color_rgb}", 200
+
+
 if __name__ == '__main__':
     app.run(address, port, debug=True)

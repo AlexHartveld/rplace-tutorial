@@ -174,7 +174,7 @@ document.addEventListener('keydown', (event) => {
         moveBy(-moveStep, 0)
     } else if (keyName == "ArrowUp") {
         moveBy(0, -moveStep);
-    } else if (keyName == "ArrowDown") {
+    } else if (keyName == "ArrowDown" || keyName == "s") {
         moveBy(0, moveStep);
     } else if (keyName == "Enter" || keyName == " ") {
         fillTheCell();
